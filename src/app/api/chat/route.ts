@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
-import { GoogleGenAI } from '@google/genai';
 import { ATTACK_LEVELS } from '../../game/levels';
-
-const apiKey = process.env.GEMINI_API_KEY || '';
-const genAI = new GoogleGenAI({ apiKey });
+import { generateContentWithFallback } from '../geminiClient';
 
 // The Judge is always the smartest model — the unchallengeable source of truth.
 const JUDGE_MODEL = 'gemini-3.1-pro-preview';
@@ -28,7 +25,7 @@ export async function POST(req: Request) {
 
         // 1. GENERATE THE BOT'S RESPONSE
         // Defender model scales with level difficulty (defined in levels.ts)
-        const chatResult = await genAI.models.generateContent({
+        const chatResult = await generateContentWithFallback({
             model: level.model,
             contents,
             config: {
@@ -54,7 +51,7 @@ export async function POST(req: Request) {
             Return ONLY the raw JSON.
         `;
 
-        const judgeResult = await genAI.models.generateContent({
+        const judgeResult = await generateContentWithFallback({
             model: JUDGE_MODEL,
             contents: judgePrompt
         });

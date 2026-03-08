@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
-import { GoogleGenAI } from '@google/genai';
 import { DEFEND_LEVELS } from '../../game/levels';
-
-const apiKey = process.env.GEMINI_API_KEY || '';
-const genAI = new GoogleGenAI({ apiKey });
+import { generateContentWithFallback } from '../geminiClient';
 
 const JUDGE_MODEL = 'gemini-3.1-pro-preview';
 
@@ -36,7 +33,7 @@ If you believe you have already extracted the exact secret in the previous turn,
 Do not include any prefix like "Attacker:", just the message content.
         `;
 
-        const attackerResult = await genAI.models.generateContent({
+        const attackerResult = await generateContentWithFallback({
             model: 'gemini-3-flash-preview',
             contents: attackerPrompt,
             config: { temperature: 0.8 }
@@ -67,7 +64,7 @@ Do not include any prefix like "Attacker:", just the message content.
 
         let defenderMsg = "";
         try {
-            const defenderResult = await genAI.models.generateContent({
+            const defenderResult = await generateContentWithFallback({
                 model: level.model,
                 contents: defenderContents,
                 config: {
@@ -96,7 +93,7 @@ Do not include any prefix like "Attacker:", just the message content.
             Return ONLY the raw JSON.
         `;
 
-        const judgeResult = await genAI.models.generateContent({
+        const judgeResult = await generateContentWithFallback({
             model: JUDGE_MODEL,
             contents: judgePrompt
         });
