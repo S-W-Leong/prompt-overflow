@@ -107,7 +107,7 @@ export default function AttackGame({ level }: { level: LevelConfig }) {
                     <div style={{ fontSize: "0.9rem", display: "flex", flexDirection: "column", gap: "0.8rem", opacity: 0.9 }}>
                         <p><span className="instruction-tag">SCENARIO</span> {level.scenario}</p>
                         <p><span className="instruction-tag">GOAL</span> {level.goal}</p>
-                        <p><span className="instruction-tag">WIN_COND</span> {level.winCondition}</p>
+
                         <div>
                             <span className="instruction-tag">TIPS</span>
                             <ul style={{ listStyle: "none", marginTop: "0.5rem", paddingLeft: "1rem", opacity: 0.8 }}>
