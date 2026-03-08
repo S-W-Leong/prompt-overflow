@@ -5,13 +5,13 @@ export default function Home() {
   return (
     <>
       <MatrixBackground />
-      <main className="main-content" style={{ minHeight: "80vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-        <div style={{ marginBottom: "2rem" }}>
-          <h1 className="glitch" style={{ fontSize: "4rem", textShadow: "0 0 20px var(--border-color)", marginBottom: "0.5rem", letterSpacing: "5px" }}>
+      <main className="main-content" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
+        <div style={{ marginBottom: "2rem", width: "100%" }}>
+          <h1 className="glitch responsive-title">
             PROMPT OVERFLOW
           </h1>
-          <div style={{ opacity: 0.9, letterSpacing: "2px", borderBottom: "1px solid var(--dark-green)", paddingBottom: "1rem", marginBottom: "2rem" }}>
-            <p className="typing-container">System Compromise In Progress... // OVERRIDE ACCEPTED</p>
+          <div style={{ opacity: 0.9, letterSpacing: "2px", borderBottom: "1px solid var(--dark-green)", paddingBottom: "1rem", marginBottom: "2rem", overflow: "hidden" }}>
+            <p className="typing-container" style={{ maxWidth: "100%", whiteSpace: "normal", wordBreak: "break-word" }}>System Compromise In Progress... // OVERRIDE ACCEPTED</p>
           </div>
         </div>
 
@@ -21,12 +21,12 @@ export default function Home() {
           </p>
         </div>
 
-        <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap", justifyContent: "center" }}>
-          <Link href="/attack" className="cta-button" style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+        <div className="cta-container">
+          <Link href="/attack" className="cta-button" style={{ display: "flex", flexDirection: "column", gap: "0.5rem", width: "100%", maxWidth: "350px" }}>
             <span>BECOME ATTACKER //</span>
             <span style={{ fontSize: "0.8rem", opacity: 0.8, letterSpacing: "0px", fontWeight: "normal" }}>Breach target systems and extract secrets</span>
           </Link>
-          <Link href="/defend" className="cta-button" style={{ display: "flex", flexDirection: "column", gap: "0.5rem", borderColor: "#33ff00", color: "#33ff00" }}>
+          <Link href="/defend" className="cta-button" style={{ display: "flex", flexDirection: "column", gap: "0.5rem", borderColor: "#33ff00", color: "#33ff00", width: "100%", maxWidth: "350px" }}>
             <span>BECOME DEFENDER //</span>
             <span style={{ fontSize: "0.8rem", opacity: 0.8, letterSpacing: "0px", fontWeight: "normal" }}>Build defenses against automated breaches</span>
           </Link>

@@ -71,23 +71,29 @@ export default function AttackGame({ level }: { level: LevelConfig }) {
     const lowHealth = health <= 30;
 
     return (
-        <main style={{ padding: "1rem", maxWidth: "800px", margin: "0 auto", height: "100vh", display: "flex", flexDirection: "column" }}>
-            <header style={{ marginBottom: "1rem", borderBottom: "1px solid var(--border-color)", paddingBottom: "1rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <main className="main-content" style={{ height: "100vh", display: "flex", flexDirection: "column", padding: "var(--content-padding)" }}>
+            <header className="hub-header" style={{ marginBottom: "1rem", borderBottom: "1px solid var(--border-color)", paddingBottom: "1rem" }}>
                 <div>
-                    <h1 className={lowHealth ? "glitch-color" : ""}>Level {level.id}: {level.name}</h1>
-                    <p style={{ opacity: 0.8 }}>Target Profile: {level.botName}</p>
+                    <h1 className={lowHealth ? "glitch-color" : ""} style={{ fontSize: "1.2rem", margin: 0 }}>Level {level.id}: {level.name}</h1>
+                    <p style={{ opacity: 0.8, fontSize: "0.8rem" }}>Target: {level.botName}</p>
                 </div>
                 <div>
-                    <Link href="/" style={{ textDecoration: "underline", fontSize: "0.8rem" }}>[ ABORT MISSION ]</Link>
+                    <Link href="/attack" style={{ textDecoration: "underline", fontSize: "0.7rem" }}>[ ABORT ]</Link>
                 </div>
             </header>
 
             <div style={{ marginBottom: "1rem" }} className={lowHealth ? "glitch" : ""}>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.8rem", marginBottom: "0.2rem" }}>
-                    <span>CONTEXT_STABILITY_BUFFER</span>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.7rem", marginBottom: "0.2rem" }}>
+                    <span>CONTEXT_STABILITY</span>
                     <span>{Math.floor(health)}%</span>
                 </div>
-                <div style={{ color: isWon ? "#33ff00" : (lowHealth ? "red" : "var(--foreground)"), textShadow: isWon ? "0 0 10px #33ff00" : "none" }}>
+                <div style={{
+                    color: isWon ? "#33ff00" : (lowHealth ? "red" : "var(--foreground)"),
+                    textShadow: isWon ? "0 0 10px #33ff00" : "none",
+                    fontSize: "0.8rem",
+                    letterSpacing: "-1px",
+                    wordBreak: "break-all"
+                }}>
                     {healthGraphic}
                 </div>
             </div>
@@ -114,13 +120,13 @@ export default function AttackGame({ level }: { level: LevelConfig }) {
                 {messages.map((msg, i) => (
                     <div key={i} style={{
                         alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
-                        maxWidth: '85%',
+                        maxWidth: '90%',
                     }}>
                         <div style={{
                             display: "flex",
                             flexDirection: "column",
                             alignItems: msg.role === 'user' ? 'flex-end' : 'flex-start',
-                            gap: "0.3rem"
+                            gap: "0.2rem"
                         }}>
                             <span style={{ fontSize: "0.7rem", opacity: 0.5 }}>
                                 {msg.role === 'user' ? 'CLIENT_LOCAL' : `${level.botName.toUpperCase()}_REMOTE`}
@@ -130,7 +136,8 @@ export default function AttackGame({ level }: { level: LevelConfig }) {
                                 padding: '0.8rem',
                                 border: msg.role === 'user' ? '1px solid var(--border-color)' : '1px solid rgba(0, 255, 0, 0.2)',
                                 whiteSpace: "pre-wrap",
-                                color: msg.role === 'user' ? "#fff" : "var(--foreground)"
+                                color: msg.role === 'user' ? "#fff" : "var(--foreground)",
+                                fontSize: "0.9rem"
                             }}>
                                 {msg.content}
                             </div>
@@ -150,13 +157,13 @@ export default function AttackGame({ level }: { level: LevelConfig }) {
                             <span>ACCESS_GRANTED</span>
                             <span>MISSION_COMPLETE</span>
                         </div>
-                        <h2 style={{ color: "#33ff00" }}>SYSTEM BREACHED</h2>
-                        <p style={{ margin: "1rem 0" }}>{judgment.reason}</p>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                            <div>
-                                CREATIVITY_RATING: {"★".repeat(judgment.rating)}{"☆".repeat(5 - judgment.rating)}
+                        <h2 style={{ color: "#33ff00", fontSize: "1.2rem" }}>SYSTEM BREACHED</h2>
+                        <p style={{ margin: "1rem 0", fontSize: "0.9rem" }}>{judgment.reason}</p>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
+                            <div style={{ fontSize: "0.8rem" }}>
+                                RATING: {"★".repeat(judgment.rating)}{"☆".repeat(5 - judgment.rating)}
                             </div>
-                            <Link href="/" style={{ background: "var(--foreground)", color: "var(--background)", padding: "0.5rem 1rem", fontWeight: "bold" }}>
+                            <Link href="/attack" style={{ background: "var(--foreground)", color: "var(--background)", padding: "0.5rem 1rem", fontWeight: "bold", fontSize: "0.8rem" }}>
                                 NEXT_TARGET
                             </Link>
                         </div>
@@ -167,13 +174,13 @@ export default function AttackGame({ level }: { level: LevelConfig }) {
             </div>
 
             {!isWon && (
-                <form onSubmit={handleSubmit} style={{ display: "flex", gap: "1rem" }}>
+                <form onSubmit={handleSubmit} style={{ display: "flex", gap: "0.5rem", padding: "0.5rem 0" }}>
                     <span style={{ alignSelf: "center" }}>{">"}</span>
                     <input
                         type="text"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        placeholder="UPLOAD_EXPLOIT_PAYLOAD..."
+                        placeholder="UPLOAD_PAYLOAD..."
                         disabled={isLoading}
                         style={{
                             flex: 1,
@@ -181,8 +188,10 @@ export default function AttackGame({ level }: { level: LevelConfig }) {
                             border: "none",
                             borderBottom: "1px solid var(--border-color)",
                             color: "var(--foreground)",
-                            padding: "0.5rem",
-                            outline: "none"
+                            padding: "0.5rem 0",
+                            outline: "none",
+                            fontSize: "1rem",
+                            borderRadius: 0
                         }}
                         autoFocus
                     />
@@ -193,22 +202,21 @@ export default function AttackGame({ level }: { level: LevelConfig }) {
                             background: "rgba(0, 255, 0, 0.1)",
                             border: "1px solid var(--border-color)",
                             color: "var(--foreground)",
-                            padding: "0.5rem 1.5rem",
+                            padding: "0.5rem 1rem",
+                            fontSize: "0.8rem",
                             cursor: isLoading || !input.trim() ? "not-allowed" : "pointer",
                             transition: "all 0.2s"
                         }}
-                        onMouseOver={(e) => !isLoading && (e.currentTarget.style.backgroundColor = "rgba(0, 255, 0, 0.3)")}
-                        onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "rgba(0, 255, 0, 0.1)")}
                     >
-                        EXECUTE
+                        EXEC
                     </button>
                 </form>
             )}
 
             <style jsx>{`
-        .blink { animation: blink-anim 1s step-end infinite; }
-        @keyframes blink-anim { 50% { opacity: 0; } }
-      `}</style>
+                .blink { animation: blink-anim 1s step-end infinite; }
+                @keyframes blink-anim { 50% { opacity: 0; } }
+            `}</style>
         </main>
     );
 }

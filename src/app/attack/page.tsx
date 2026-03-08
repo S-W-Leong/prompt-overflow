@@ -4,7 +4,7 @@ import { ATTACK_LEVELS } from "../game/levels";
 export default function AttackHub() {
     return (
         <main className="main-content">
-            <header style={{ marginBottom: "2rem", borderBottom: "1px solid var(--border-color)", paddingBottom: "1rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <header className="hub-header" style={{ marginBottom: "2rem", borderBottom: "1px solid var(--border-color)", paddingBottom: "1rem" }}>
                 <h1 className="glitch">ATTACK_HUB</h1>
                 <div><Link href="/" style={{ textDecoration: "underline", fontSize: "0.8rem" }}>[ RETURN_TO_BASE ]</Link></div>
             </header>
@@ -43,7 +43,7 @@ export default function AttackHub() {
             <p style={{ opacity: 0.8, marginBottom: "3rem" }}>Select a target bot to initiate penetration sequence.</p>
 
             <section>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))", gap: "2rem" }}>
+                <div className="grid-cols-mobile-1" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "2rem" }}>
                     {ATTACK_LEVELS.map((level) => (
                         <Link
                             key={level.id}

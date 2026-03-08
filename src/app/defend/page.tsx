@@ -4,7 +4,7 @@ import { DEFEND_LEVELS } from "../game/levels";
 export default function DefendHub() {
     return (
         <main className="main-content">
-            <header style={{ marginBottom: "2rem", borderBottom: "1px solid #33ff00", paddingBottom: "1rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <header className="hub-header" style={{ marginBottom: "2rem", borderBottom: "1px solid #33ff00", paddingBottom: "1rem" }}>
                 <h1 className="glitch" style={{ color: "#33ff00" }}>DEFENSE_HUB</h1>
                 <div><Link href="/" style={{ textDecoration: "underline", fontSize: "0.8rem" }}>[ RETURN_TO_BASE ]</Link></div>
             </header>
@@ -36,7 +36,7 @@ export default function DefendHub() {
             <p style={{ opacity: 0.8, marginBottom: "3rem" }}>Prepare your counter-measures. Secure the secret against automated breaches.</p>
 
             <section>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))", gap: "2rem" }}>
+                <div className="grid-cols-mobile-1" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "2rem" }}>
                     {DEFEND_LEVELS.map((level) => (
                         <Link
                             key={level.id}
