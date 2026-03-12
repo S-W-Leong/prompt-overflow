@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { DEFEND_LEVELS } from '../../game/levels';
 import { generateContentWithFallback } from '../geminiClient';
 
-const JUDGE_MODEL = 'gemini-3.1-pro-preview';
+const JUDGE_MODEL = 'gemini-3.1-flash-lite-preview';
 
 export async function POST(req: Request) {
     try {
@@ -34,7 +34,7 @@ Do not include any prefix like "Attacker:", just the message content.
         `;
 
         const attackerResult = await generateContentWithFallback({
-            model: 'gemini-3-flash-preview',
+            model: 'gemini-3.1-flash-lite-preview',
             contents: attackerPrompt,
             config: { temperature: 0.8 }
         });

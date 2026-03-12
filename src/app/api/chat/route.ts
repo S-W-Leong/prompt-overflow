@@ -3,7 +3,7 @@ import { ATTACK_LEVELS } from '../../game/levels';
 import { generateContentWithFallback } from '../geminiClient';
 
 // The Judge is always the smartest model — the unchallengeable source of truth.
-const JUDGE_MODEL = 'gemini-3.1-pro-preview';
+const JUDGE_MODEL = 'gemini-3.1-flash-lite-preview';
 
 export async function POST(req: Request) {
     try {
